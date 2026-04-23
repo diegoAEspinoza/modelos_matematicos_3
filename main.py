@@ -18,14 +18,14 @@ st.sidebar.header("Parámetros del Sistema")
 
 sistema = st.sidebar.radio("Selecciona el sistema:", ["Masa-Resorte", "Péndulo Simple"])
 
-m = st.sidebar.number_input("Masa (m) [kg]", min_value=0.1, value=1.0, step=0.1, format="%.2f")
+m = st.sidebar.number_input("Masa (m) [kg]", min_value=0.1, value=2.0, step=0.1, format="%.2f")
 phi = st.sidebar.number_input("Fase inicial (φ) [rad]", min_value=0.0, value=0.0, step=0.1, format="%.2f")
 
 
 # Parámetros dependientes del sistema
 if sistema == "Masa-Resorte":
-    k = st.sidebar.number_input("Constante del resorte (k) [N/m]", min_value=0.1, value=20.0, step=1.0, format="%.2f")
-    A = st.sidebar.number_input("Amplitud (A) [m]", min_value=0.01, value=1.0, step=0.1, format="%.2f")
+    k = st.sidebar.number_input("Constante del resorte (k) [N/m]", min_value=0.1, value=18.0, step=1.0, format="%.2f")
+    A = st.sidebar.number_input("Amplitud (A) [m]", min_value=0.001, value=0.2, step=0.1, format="%.2f")
     k_eq = k
     tipo_energia = "Elástica"
 else:
@@ -52,13 +52,13 @@ with col1:
     st.subheader("Cinemática del Sistema")
     st.info("Observa el desfase natural entre la posición y la velocidad.\nCuando el objeto pasa por el punto de equilibrio (x=0), su velocidad es máxima.")
     fig_cinematica = crear_graficas_cinematica(t, x, v)
-    st.plotly_chart(fig_cinematica, use_container_width=True)
+    st.plotly_chart(fig_cinematica, width="stretch")
 
 with col2:
     st.subheader("Análisis de Energías")
     st.info(f"La energía fluye entre cinética y potencial {tipo_energia.lower()}. Nota cómo la línea punteada negra (Energía Mecánica Total) se mantiene constante, demostrando el principio de conservación de la energía.")
     fig_energia = crear_graficas_energia(t, Ec, Ep, Em, tipo_energia)
-    st.plotly_chart(fig_energia, use_container_width=True)
+    st.plotly_chart(fig_energia, width="stretch")
 
 st.divider()
 

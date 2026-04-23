@@ -3,7 +3,7 @@ import numpy as np
 
 def mostrar_referencia_matematica(sistema, theta_max=None):
     """Muestra las ecuaciones dinámicamente según el sistema seleccionado."""
-    st.subheader(f"📚 Referencia Matemática: {sistema}")
+    st.subheader(f"Referencia Matemática: {sistema}")
     
     with st.expander("Ver Formulario Matemático", expanded=True):
         col1, col2 = st.columns(2)
@@ -15,8 +15,8 @@ def mostrar_referencia_matematica(sistema, theta_max=None):
                 st.latex(r"v(t) = -A\omega \sin(\omega t + \phi)")
             with col2:
                 st.markdown("**Energías**")
-                st.latex(r"E_c = \frac{1}{2} m v^2")
-                st.latex(r"E_p = \frac{1}{2} k x^2")
+                st.latex(r"E_p = \frac{1}{2} k x^2 = \frac{1}{2} k A^2  \cos^2(\omega t + \phi)")
+                st.latex(r"E_c = \frac{1}{2} m v^2 = \frac{1}{2} m A^2  \omega^2 \sin^2(\omega t + \phi)")
             st.info(r"Frecuencia angular: $\omega = \sqrt{k/m}$")
             
         else: # Péndulo Simple
@@ -29,14 +29,14 @@ def mostrar_referencia_matematica(sistema, theta_max=None):
                 st.latex(r"E_c = \frac{1}{2} m v^2")
                 st.latex(r"E_p = \frac{1}{2} \left(\frac{mg}{L}\right) s^2")
             
-            st.info(r"Frecuencia angular: $\omega = \sqrt{g/L}$")
+            st.info(r"Frecuencia angular: $\omega = \sqrt{g/L}\quad\quad s_{max} = L \theta_{max}$")
             
             if theta_max is not None:
                 if theta_max > 15:
-                    st.warning(f"⚠️ Alerta: El ángulo seleccionado ({theta_max}°) es mayor a 15°. "
-                               "La aproximación $\sin(\\theta) \\approx \\theta$ pierde validez y el error del modelo MAS aumenta.")
+                    st.warning(f"Alerta: El ángulo seleccionado ({theta_max}°) es mayor a 15°. "
+                               "La aproximación $\sin(\theta) \approx \theta$ pierde validez y el error del modelo MAS aumenta.")
                 else:
-                    st.success(f"✅ Ángulo de {theta_max}° adecuado para el modelo de oscilador armónico.")
+                    st.success(f"Ángulo de {theta_max}° adecuado para el modelo de oscilador armónico.")
 
 def mostrar_calculadora_punto(sistema, m, k_eq, A, phi, L=None, theta_max_rad=None):
     """Sección interactiva para calcular valores instantáneos y analizar el periodo."""
